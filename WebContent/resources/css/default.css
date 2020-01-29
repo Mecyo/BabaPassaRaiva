@@ -1,0 +1,80 @@
+/*tamanho da fonte dos componentes do primefaces*/
+.ui-widget {
+	font-size: 12px !important;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+#content {
+	min-height: 93%;
+	margin-top: 5%;
+}
+
+#header {
+	position: fixed;
+	top: 0;
+	padding: 0px;
+	width: 100%;
+	z-index: 1;
+}
+
+#body {
+	padding: 10px;
+	padding-bottom: 60px;
+}
+
+#footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 20px;
+	background: #3399FF;
+	color: white;
+}
+
+body .ui-staticmessage.ui-message {
+	width: 100%;
+}
+
+.btn-voltar {
+	background: #f5f504 !important;
+	float: left !important;
+	color: grey !important;
+}
+
+.btn-salvar {
+	background: #30a722 !important;
+	float: right !important;
+	color: white !important;
+}
+
+.btn-right {
+	margin-left: 5px !important;
+	float: right !important;
+    background: url(../resources/images/logout-white.png) no-repeat;
+    height:16px;
+    width:16px;
+}
+
+.backgroundDefault {
+    background: url(../resources/images/PAGINA_CONSTRUCAO.jpg) no-repeat;
+    height: 965px;
+    background-size: 100%;
+}
+
+.ui-inputfield {
+	width: 50% !important;
+}
+
+.labelCadastro {
+	width: 100% !important;
+	color: black !important;	
+}
+
+.buttonScroll {
+	position: initial;
+}

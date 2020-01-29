@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<ui:composition template="../template/templateLayout.xhtml">
+
+	<ui:define name="content">
+		<p:messages showDetail="true" autoUpdate="true" closable="true"
+			severity="warn" />
+		<p:messages autoUpdate="true" closable="true" severity="error" />
+		<p:messages showDetail="true" autoUpdate="true" closable="true"
+			severity="info" />
+
+		<p:commandButton value="Novo" id="commandButton-cadastrar" style="position:initial;"
+			actionListener="#{listarGeradoraController.Cadastrar}" />
+		<br />
+		<br />
+		<h:form id="form">
+			<p:growl id="msgs" showDetail="true" />
+
+			<p:dataTable id="geradoras" var="ger"
+				value="#{listarGeradoraController.geradoras}">
+				<f:facet name="header"> Lista de Geradoras </f:facet>
+				<p:column headerText="Id">
+					<h:outputText value="#{ger._id}" />
+				</p:column>
+				
+				<p:column headerText="Nome">
+					<h:outputText value="#{ger.nome}" />
+				</p:column>
+
+				<p:column headerText="Latitude">
+					<h:outputText value="#{ger.endereco.latitude}" />
+				</p:column>
+
+				<p:column headerText="Longitude">
+					<h:outputText value="#{ger.endereco.longitude}" />
+				</p:column>
+				<p:column style="width:64px;" headerText="Opções">
+					<p:commandButton style="background:none;"
+						icon="ui-icon-alterarbutton" title="Editar">
+						<f:setPropertyActionListener value="#{end}"
+							target="#{listarGeradoraController.selectedEndereco}" />
+					</p:commandButton>
+					<p:commandButton style="background:none;"
+						actionListener="#{listarGeradoraController.Excluir}"
+						icon="ui-icon-trash" title="Excluir">
+						<f:setPropertyActionListener value="#{end}"
+							target="#{listarGeradoraController.selectedEndereco}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		<br />
+		<p:commandButton class="btn-voltar" value="Voltar"
+			id="commandButton-voltar" icon="ui-icon-arrowthick-1-w"
+			actionListener="#{listarGeradoraController.Voltar}" />
+
+	</ui:define>
+
+</ui:composition>
+</html>

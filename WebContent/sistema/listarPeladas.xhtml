@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<ui:composition template="../template/templateLayout.xhtml">
+	<ui:define name="content">
+		<p:messages showDetail="true" autoUpdate="true" closable="true"
+			severity="warn" />
+		<p:messages autoUpdate="true" closable="true" severity="error" />
+		<p:messages showDetail="true" autoUpdate="true" closable="true"
+			severity="info" />
+
+		<h:form id="form">
+		<p:commandButton value="Nova" id="commandButton-cadastrar"
+			style="position:initial;"
+			actionListener="#{listarPeladaController.Cadastrar}" />
+		<br />
+		<br />
+			<p:growl id="msgs" showDetail="true" />
+
+			<p:dataTable id="peladas" var="pel"
+				value="#{listarPeladaController.peladas}">
+				<f:facet name="header"> Lista de Peladas </f:facet>
+				<p:column headerText="Id">
+					<h:outputText value="#{pel.id}" />
+				</p:column>
+
+				<p:column headerText="Nome do Evento">
+					<h:outputText value="#{pel.nomeEvento}" />
+				</p:column>
+
+				<p:column headerText="Data">
+					<h:outputText value="#{pel.data}" />
+				</p:column>
+
+				<p:column headerText="Local">
+					<h:outputText value="#{pel.local}" />
+				</p:column>
+				
+				<p:column headerText="Responsável">
+					<h:outputText value="#{pel.owner.apelido}" />
+				</p:column>
+
+				<p:column headerText="Opções">
+				<p:commandButton style="background:none;"
+						action="#{listarPeladaController.Convidar(pel)}"
+						title="Convidar novos jogadores" value="Convidar">
+						<f:setPropertyActionListener value="#{pel}"
+							target="#{listarPeladaController.selectedPelada}" />
+					</p:commandButton>
+					<p:commandButton style="background:none;"
+						action="#{listarPeladaController.Jogadores(pel)}"
+						value="Jogadores" title="Listar Jogadores">
+						<f:setPropertyActionListener value="#{pel}"
+							target="#{listarPeladaController.selectedPelada}" />
+					</p:commandButton>
+					
+					<p:commandButton style="background:none;"
+						action="#{listarPeladaController.Convidados(pel)}"
+						title="Listar Convidados" value="Convites enviados">
+						<f:setPropertyActionListener value="#{pel}"
+							target="#{listarPeladaController.selectedPelada}" />
+					</p:commandButton>
+					<p:commandButton style="background:none;"
+						action="#{listarPeladaController.Vincular}"
+						rendered="#{listarPeladaController.exibirVincular(pel)}"
+						icon="ui-icon-trash" value="Vincular" title="Vincular">
+						<f:setPropertyActionListener value="#{pel}"
+							target="#{listarPeladaController.selectedPelada}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		<br />
+		<p:commandButton styleClass="btn-voltar" value="Voltar"
+			id="commandButton-voltar" icon="ui-icon-arrowthick-1-w"
+			actionListener="#{listarPeladaController.Voltar}" />
+		</h:form>
+		
+		<h:form>
+		
+		<p:dialog id="modalJogadores" header="Jogadores cadastrados na pelada"
+					widgetVar="modalJogadores" modal="false" height="120" width="500">
+					<p:dataTable id="jogadores" var="usu"
+				value="#{listarPeladaController.selectedPelada.jogadores}">
+				<f:facet name="header"> Lista de Jogadores </f:facet>
+
+				<p:column headerText="Apelido">
+					<h:outputText value="#{usu.apelido}" />
+				</p:column>
+
+				<p:column style="width:64px;" headerText="Opções">
+					<p:commandButton style="background:none;"
+						action="#{listarPeladaController.removerDoEvento(usu)}"
+						icon="ui-icon-trash" value="Excluir" title="Excluir da pelada">
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+				</p:dialog>
+				
+				<p:dialog id="modalConvidados" header="Jogadores convidados para a pelada"
+					widgetVar="modalConvidados" modal="false" height="120" width="500">
+					<p:dataTable id="convidados" var="usu"
+				value="#{listarPeladaController.selectedPelada.convidados}">
+				<f:facet name="header"> Lista de Convidados </f:facet>
+
+				<p:column headerText="Apelido">
+					<h:outputText value="#{usu.apelido}" />
+				</p:column>
+
+				<p:column style="width:64px;" headerText="Opções">
+					<p:commandButton style="background:none;"
+						action="#{listarPeladaController.cancelarConvite(usu)}"
+						icon="ui-icon-alterarbutton" value="Cancelar" title="Cancelar convite">
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+				</p:dialog>
+				
+				<p:dialog id="modalConvidar" header="Convidar Jogadores para a pelada"
+					widgetVar="modalConvidar" modal="false" height="120" width="500">
+					<p:dataTable id="convidar" var="usu"
+				value="#{listarPeladaController.jogadoresDisponiveis}">
+				<f:facet name="header"> Lista de Jogadores </f:facet>
+
+				<p:column headerText="Apelido">
+					<h:outputText value="#{usu.apelido}" />
+				</p:column>
+
+				<p:column style="width:64px;" headerText="Opções">
+					<p:commandButton style="background:none;"
+						action="#{listarPeladaController.removerDoEvento(usu)}"
+						icon="ui-icon-trash" value="Excluir" title="Excluir da pelada">
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+				</p:dialog>
+				
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+</html>

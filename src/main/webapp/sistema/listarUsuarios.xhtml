@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<ui:composition template="../template/templateLayout.xhtml">
+	<ui:define name="content">
+		<p:messages showDetail="true" autoUpdate="true" closable="true"
+			severity="warn" />
+		<p:messages autoUpdate="true" closable="true" severity="error" />
+		<p:messages showDetail="true" autoUpdate="true" closable="true"
+			severity="info" />
+
+		<h:form id="form">
+		<p:commandButton value="Novo" id="commandButton-cadastrar"
+			style="position:initial;"
+			actionListener="#{listarUsuarioController.Cadastrar}" />
+		<br />
+		<br />
+			<p:growl id="msgs" showDetail="true" />
+
+			<p:dataTable id="usuarios" var="usu"
+				value="#{listarUsuarioController.usuarios}">
+				<f:facet name="header"> Lista de Usuários </f:facet>
+				<p:column headerText="Id">
+					<h:outputText value="#{usu.id}" />
+				</p:column>
+
+				<p:column headerText="Nome">
+					<h:outputText value="#{usu.nome}" />
+				</p:column>
+
+				<p:column headerText="Apelido">
+					<h:outputText value="#{usu.apelido}" />
+				</p:column>
+
+				<p:column headerText="E-mail">
+					<h:outputText value="#{usu.email}" />
+				</p:column>
+
+				<p:column style="width:64px;" headerText="Opções">
+					<p:commandButton style="background:none;"
+						action="#{listarUsuarioController.Editar(usu)}"
+						icon="ui-icon-alterarbutton" title="Editar">
+						<f:setPropertyActionListener value="#{usu}"
+							target="#{listarUsuarioController.selectedUsuario}" />
+					</p:commandButton>
+					<p:commandButton style="background:none;"
+						actionListener="#{listarUsuarioController.Excluir}"
+						icon="ui-icon-trash" title="Excluir">
+						<f:setPropertyActionListener value="#{usu}"
+							target="#{listarUsuarioController.selectedUsuario}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		<br />
+		<p:commandButton styleClass="btn-voltar" value="Voltar"
+			id="commandButton-voltar" icon="ui-icon-arrowthick-1-w"
+			actionListener="#{listarUsuarioController.Voltar}" />
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+</html>

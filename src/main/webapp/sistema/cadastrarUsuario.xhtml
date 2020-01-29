@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<ui:composition template="../template/templateLayout.xhtml">
+
+	<ui:define name="content">
+
+		<p:tabView id="tabCadastro"
+			style="width: 400px; height: auto; margin: auto; background: #ececec">
+			<p:tab title="Cadastro de Usuário">
+
+				<h:form id="form-cadastro">
+
+					<h:panelGrid id="panelGrid-campos-form" columns="2" cellpadding="5">
+						<h:outputLabel styleClass="labelCadastro" for="inputNome"
+							id="lblNome" value="Nome:" />
+						<p:inputText id="inputNome" style="width: 150% !important;"
+							maxlength="70" value="#{cadastrarUsuarioController.usuario.nome}"
+							required="true"
+							requiredMessage="O nome é de preenchimento obrigatório" />
+
+						<h:outputLabel styleClass="labelCadastro" for="inputApelido"
+							id="lblApelido" value="Apelido:" />
+						<p:inputText id="inputApelido" style="width: 100% !important;"
+							maxlength="20"
+							value="#{cadastrarUsuarioController.usuario.apelido}"
+							required="true"
+							requiredMessage="O apelido é de preenchimento obrigatório" />
+
+						<h:outputLabel styleClass="labelCadastro" for="inputEmail"
+							id="lblEmail" value="E-mail:" />
+						<p:inputText id="inputEmail" style="width: 100% !important;"
+							maxlength="70"
+							value="#{cadastrarUsuarioController.usuario.email}"
+							required="true"
+							requiredMessage="O email é de preenchimento obrigatório" />
+
+						<h:outputLabel styleClass="labelCadastro" for="inputSenha"
+							id="lblSenha" value="Senha:" />
+						<p:inputText id="inputSenha" style="width: 100px !important;"
+							maxlength="20"
+							value="#{cadastrarUsuarioController.usuario.senha}"
+							required="true" update="messages"
+							requiredMessage="A senha é de preenchimento obrigatório" />
+
+					</h:panelGrid>
+
+					<p:messages showDetail="true" autoUpdate="true" closable="true"
+						severity="warn" />
+					<p:messages autoUpdate="true" closable="true" severity="error" />
+					<p:messages showDetail="true" autoUpdate="true" closable="true"
+						severity="info" />
+						
+						<p:commandButton styleClass="btn-voltar" value="Voltar"
+				id="commandButton-voltar" icon="ui-icon-arrowthick-1-w"
+				actionListener="#{cadastrarUsuarioController.Voltar}" />
+			<p:commandButton styleClass="btn-salvar" value="Salvar"
+				id="commandButton-salvar" icon="ui-icon-disk"
+				action="#{cadastrarUsuarioController.salvar}" />
+
+				</h:form>
+
+			</p:tab>
+
+		</p:tabView>
+
+	</ui:define>
+
+</ui:composition>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+<h:body>
+	<ui:composition>
+
+		<h:form id="formHeader">
+
+			<p:menubar id="menuHeader">
+				<p:menuitem value="Home" icon="ui-icon-home" action="#{headerController.navegar('home.xhtml')}"/>
+				<p:submenu label="Cadastros" icon="ui-icon-bookmark">
+					<p:menuitem value="Peladas" icon="ui-icon-tag" action="#{headerController.navegar('listarPeladas.xhtml')}"/>
+					<p:menuitem value="Usuários" icon="ui-icon-signal-diag" action="#{headerController.navegar('listarUsuarios.xhtml')}"/>
+				</p:submenu>
+
+				<p:menuitem id="userNameMsg" style="position: absolute; right: 54px;"
+					value="Bem-vindo #{headerController.apelido}." disabled="true" />
+				<p:menuitem style="position: absolute; right: 4px;" value="Sair"
+					icon="btn-right" action="#{headerController.logout}" />
+
+			</p:menubar>
+
+		</h:form>
+
+	</ui:composition>
+</h:body>
+</html>

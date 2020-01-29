@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<h:body>
+
+	<ui:composition template="../template/templateLayout.xhtml">
+
+		<ui:define name="header">
+		</ui:define>
+
+		<ui:define name="content">
+			<h:form id="formDialog">
+
+				<p:dialog id="loginModal" header="Autenticação de usuário" closable="false"
+					widgetVar="loginDialog" modal="true" height="120" width="500" visible="true">
+					<h:panelGrid columns="4" style="text-align: center;"
+						cellpadding="5" cellspacing="1">
+						<h:outputLabel for="email" value="E-mail:" />
+						<p:inputText id="email" required="true" label="email" size="40"
+							requiredMessage="O endereço de e-mail é obrigatório."
+							value="#{loginController.usuario.email}">
+						</p:inputText>
+						<p:watermark for="email" value="Endereço de Email *" />
+						<p:message for="email" />
+
+						<h:outputLabel for="senha" value="Senha:" />
+						<p:password id="senha" value="#{loginController.usuario.senha}"
+							required="true" requiredMessage="É obrigatório informar a senha!" />
+						<p:watermark for="senha" value="Informe a senha *" />
+						<p:message for="senha" />
+
+					</h:panelGrid>
+					<f:facet name="footer" style="text-align: center;" resize="false">
+						<p:commandButton value="Login" action="#{loginController.login}"
+							ajax="false" update="formHeader:menuHeader" />
+					</f:facet>
+
+				</p:dialog>
+
+			</h:form>
+		</ui:define>
+
+		<ui:define name="footer">
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+</html>
